@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import generateCharacter from "cronicas-de-la-marca-lib";
+import { generateCharacter } from "cronicas-de-la-marca-lib";
 
 interface Props {
   onCharacterCreated: (character: any) => void;
@@ -42,7 +42,7 @@ const GenerateCharacter: React.FC<Props> = ({ onCharacterCreated }) => {
   const [name, setName] = useState("");
   const [ancestry, setAncestry] = useState("");
   const [charClass, setCharClass] = useState("");
-  const [level, setLevel] = useState("1"); // Valor inicial
+  const [level, setLevel] = useState<number>(1); // Valor inicial
   const [error, setError] = useState("");
 
   const handleGenerateCharacter = () => {

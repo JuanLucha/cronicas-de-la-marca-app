@@ -1,12 +1,5 @@
 import React from "react";
-
-// Define a type for your characters
-interface Character {
-  name: string;
-  ancestry: string;
-  class: string;
-  level: number;
-}
+import { Character } from "../../types/character-type";
 
 // Define a type for the component props
 interface CharacterListProps {
