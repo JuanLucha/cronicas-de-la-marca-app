@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { generateCharacter } from "cronicas-de-la-marca-lib";
+import "./generate-character.css";
 
 interface Props {
   onCharacterCreated: (character: any) => void;
@@ -62,7 +63,7 @@ const GenerateCharacter: React.FC<Props> = ({ onCharacterCreated }) => {
   };
 
   return (
-    <div>
+    <div className="generate-character">
       <label>
         Nombre
         <input

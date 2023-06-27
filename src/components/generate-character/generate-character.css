@@ -1,0 +1,42 @@
+* {
+  box-sizing: border-box;
+}
+
+.generate-character {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  padding: 20px;
+}
+
+.generate-character label {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.generate-character input,
+.generate-character select {
+  width: 100%;
+  padding: 5px;
+  font-size: 1em;
+}
+
+.generate-character button {
+  background-color: #4CAF50; 
+  border: none;
+  color: white;
+  padding: 5px 16px; /* Reduced padding here */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+.generate-character button:hover {
+  background-color: #45a049;
+}
