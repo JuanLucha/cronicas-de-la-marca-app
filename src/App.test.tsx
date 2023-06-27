@@ -2,9 +2,8 @@ import React from "react";
 import { render, fireEvent, waitFor } from "@testing-library/react";
 import App from "./App";
 import { generateCharacter } from "cronicas-de-la-marca-lib";
-import CharacterList from "./components/character-list";
-import GenerateCharacter from "./components/generate-character";
 import { Character } from "./types/character-type";
+import { characterMock } from "./helpers/mocks/character-mock";
 
 jest.mock("cronicas-de-la-marca-lib");
 
@@ -19,7 +18,7 @@ describe("App", () => {
   });
 
   it("loads characters from localStorage on mount", async () => {
-    const characters: Character[] = [
+    const characters: Partial<Character>[] = [
       { name: "Test Character 1", ancestry: "elf", class: "mage", level: 1 },
       {
         name: "Test Character 2",
@@ -38,30 +37,39 @@ describe("App", () => {
   });
 
   it("updates character list when a new character is generated", async () => {
-    const newCharacter = {
-      name: "New Character",
-      ancestry: "dwarf",
-      class: "barbarian",
-      level: 5
-    };
-    mockGenerateCharacter.mockReturnValueOnce(newCharacter);
+    mockGenerateCharacter.mockReturnValueOnce(characterMock);
 
     const { getByText, getByLabelText } = render(<App />);
 
     fireEvent.change(getByLabelText(/nombre/i), {
-      target: { value: newCharacter.name }
+      target: { value: characterMock.name }
     });
     fireEvent.change(getByLabelText(/ascendencia/i), {
-      target: { value: newCharacter.ancestry }
+      target: { value: characterMock.ancestry }
     });
     fireEvent.change(getByLabelText(/clase/i), {
-      target: { value: newCharacter.class }
+      target: { value: characterMock.class }
     });
     fireEvent.change(getByLabelText(/nivel/i), {
-      target: { value: newCharacter.level }
+      target: { value: characterMock.level }
     });
     fireEvent.click(getByText("Generar personaje"));
 
-    await waitFor(() => getByText(newCharacter.name));
+    await waitFor(() => getByText(characterMock.name));
+  });
+
+  it("shows CharacterDetails when a character is clicked", () => {
+    localStorage.setItem("characters", JSON.stringify([characterMock]));
+
+    const { getByText, queryByText } = render(<App />);
+
+    // Clicking on the character should display the character details
+    fireEvent.click(getByText(characterMock.name));
+
+    // After clicking on the character, we should see the character details
+    expect(getByText(characterMock.name)).toBeInTheDocument();
+
+    // And the character list should no longer be in the document
+    expect(queryByText("Generate Character")).not.toBeInTheDocument();
   });
 });

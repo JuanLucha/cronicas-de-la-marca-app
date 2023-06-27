@@ -1,9 +1,11 @@
+import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import CharacterList from "./character-list";
+import { Character } from "../../types/character-type";
 
 // Mock characters data
-const characters = [
+const characters: Partial<Character> = [
   {
     name: "Juan",
     ancestry: "human",
