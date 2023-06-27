@@ -1,5 +1,5 @@
-import React from "react";
 import { Character } from "../../types/character-type";
+import "./character-details.css";
 
 const CharacterDetail = ({
   character,
@@ -13,13 +13,21 @@ const CharacterDetail = ({
   }
 
   return (
-    <div>
+    <div className="character-detail">
       <h2>{character.name}</h2>
       <p>Ascendencia: {character.ancestry}</p>
       <p>Clase: {character.class}</p>
       <p>Nivel: {character.level}</p>
 
       <h3>Características</h3>
+      {Object.entries(character.stats).map(([stat, value]) => (
+        <p key={stat}>
+          {stat}: {value}
+        </p>
+      ))}
+
+      <p>Puntos de Experiencia: {character.experiencePoints}</p>
+
       <p>Ataque: {character.attackBonus}</p>
       <p>Clase de Armadura: {character.armorClass}</p>
       <p>Puntos de golpe: {character.hitPoints}</p>
@@ -38,15 +46,6 @@ const CharacterDetail = ({
           <li key={index}>{ability}</li>
         ))}
       </ul>
-
-      <h3>Estadísticas</h3>
-      {Object.entries(character.stats).map(([stat, value]) => (
-        <p key={stat}>
-          {stat}: {value}
-        </p>
-      ))}
-
-      <p>Puntos de Experiencia: {character.experiencePoints}</p>
 
       <button onClick={goBack}>Volver</button>
     </div>
