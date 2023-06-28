@@ -1,6 +1,6 @@
 {
   "name": "cronicas-de-la-marca-app",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "private": true,
   "dependencies": {
     "@testing-library/user-event": "^13.5.0",

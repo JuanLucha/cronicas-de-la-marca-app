@@ -5,6 +5,10 @@ Todas las modificaciones notables de este proyecto serán documentadas en este a
 El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
 y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
+## [1.0.1] - 2023-06-28
+### Añadido
+- Botón "eliminar" en cada personaje del listado.
+
 ## [1.0.0] - 2023-06-27
 ### Añadido
 - Listado de personajes.

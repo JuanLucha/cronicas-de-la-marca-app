@@ -12,21 +12,12 @@ const loadedCharacters = () => {
     return [];
   }
 };
+
 const App = () => {
   const [characters, setCharacters] = useState<Character[]>(loadedCharacters());
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(
     null
   );
-
-  // Load the characters from localStorage on mount
-  // useEffect(() => {
-  //   const loadedCharacters = localStorage.getItem("characters");
-  //   if (loadedCharacters) {
-  //     setCharacters(JSON.parse(loadedCharacters));
-  //   } else {
-  //     setCharacters([]);
-  //   }
-  // }, []);
 
   // Stores the characters in localStorage
   useEffect(() => {
@@ -40,6 +31,12 @@ const App = () => {
     ]);
   };
 
+  const onDeleteCharacter = (characterToDelete: Character) => {
+    setCharacters((prevCharacters: Character[]) =>
+      prevCharacters.filter((character) => character !== characterToDelete)
+    );
+  };
+
   return (
     <div>
       {!selectedCharacter && (
@@ -49,6 +46,7 @@ const App = () => {
         <CharacterList
           characters={characters}
           onCharacterClick={setSelectedCharacter}
+          onDeleteCharacter={onDeleteCharacter}
         />
       )}
       {selectedCharacter && (

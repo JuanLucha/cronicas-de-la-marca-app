@@ -72,4 +72,32 @@ describe("App", () => {
     // And the character list should no longer be in the document
     expect(queryByText("Generate Character")).not.toBeInTheDocument();
   });
+
+  it("updates character list when a character is deleted", async () => {
+    const characters: Partial<Character>[] = [
+      { name: "Test Character 1", ancestry: "elf", class: "mage", level: 1 },
+      {
+        name: "Test Character 2",
+        ancestry: "human",
+        class: "warrior",
+        level: 3
+      }
+    ];
+
+    localStorage.setItem("characters", JSON.stringify(characters));
+
+    const { getByText, queryByText, getAllByRole } = render(<App />);
+
+    // Wait for characters to load
+    await waitFor(() => getByText("Test Character 1"));
+
+    // Click delete button of a character
+    const deleteButtons = getAllByRole("button", { name: /eliminar/i });
+    fireEvent.click(deleteButtons[0]);
+
+    // Verify character is no longer in the DOM
+    await waitFor(() =>
+      expect(queryByText("Test Character 1")).not.toBeInTheDocument()
+    );
+  });
 });

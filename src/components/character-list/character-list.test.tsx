@@ -62,4 +62,34 @@ describe("CharacterList", () => {
     userEvent.click(firstCharacterItem);
     expect(mockFunction).toHaveBeenCalledWith(characters[0]);
   });
+
+  it("calls the delete function when the delete button is clicked", () => {
+    const mockFunction = jest.fn();
+    render(
+      <CharacterList
+        characters={characters}
+        onCharacterClick={jest.fn()}
+        onDeleteCharacter={mockFunction} // prop para el manejador de borrado
+      />
+    );
+
+    const deleteButtons = screen.getAllByRole("button", { name: /eliminar/i }); // buscar "eliminar", no "delete"
+    userEvent.click(deleteButtons[0]); // Haz clic en el botón de eliminar del primer personaje
+    expect(mockFunction).toHaveBeenCalledTimes(1);
+  });
+
+  it("calls the delete function with the correct character when the delete button is clicked", () => {
+    const mockFunction = jest.fn();
+    render(
+      <CharacterList
+        characters={characters}
+        onCharacterClick={jest.fn()}
+        onDeleteCharacter={mockFunction} // prop para el manejador de borrado
+      />
+    );
+
+    const deleteButtons = screen.getAllByRole("button", { name: /eliminar/i }); // buscar "eliminar", no "delete"
+    userEvent.click(deleteButtons[0]); // Haz clic en el botón de eliminar del primer personaje
+    expect(mockFunction).toHaveBeenCalledWith(characters[0]);
+  });
 });
